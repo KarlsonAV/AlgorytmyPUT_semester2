@@ -1,11 +1,13 @@
 #include <iostream>
 #include <vector>
+#include <cmath>
 
 using namespace std;
 
 void SS(vector<int> &arr, int n);
 void IS(vector<int> &arr, int n);
 void BS(vector<int> &arr, int n);
+void MS(vector<int> &arr, int n);
 
 int main() {
     cout << "This program takes as input some numbers and returns sorted list" << endl;
@@ -41,6 +43,12 @@ int main() {
         case 3:
             BS(arr,n);
             break;
+        case 4:
+            break;
+        case 5:
+            MS(arr,n);
+            break;
+
         default:
             break;
     }
@@ -88,4 +96,16 @@ void BS(vector<int> &arr, int n) {
         }
     }
     return;
+}
+
+void MS(vector<int> &arr, int n) {
+    for (int d = n / 2; d > 0; d /= 2) {
+        for (int i = d; i < n; i++) {
+            for(int j = i - d; j >= 0; j -= d) {
+                if (arr[j+d] < arr[j]) {
+                    swap(arr[j+d], arr[j]);
+                }
+            }
+        }
+    }            
 }
