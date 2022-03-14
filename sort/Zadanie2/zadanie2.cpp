@@ -1,74 +1,10 @@
 #include <iostream>
+#include <stdlib.h>
 #include <vector>
-#include <cmath>
+#include <stdlib.h>
+#include <time.h> 
 
 using namespace std;
-
-void SS(vector<int> &arr, int n);
-void IS(vector<int> &arr, int n);
-void BS(vector<int> &arr, int n);
-void MSa(vector<int> &arr, int n);
-void QS(vector<int> &arr, int left, int right);
-vector<int> MS(vector<int> arr, int n);
-void HS(vector<int> &arr, int n);
-void Heapify(vector<int> &arr, int r, int n);
-void BuildHeap(vector<int> &arr, int n);
-void CS(vector<int> &arr, int n);
-
-int main() {
-    cout << "This program takes as input some numbers and returns sorted list" << endl;
-    int n;
-    cout << "Enter amount of numbers that you would like to sort: ";
-    cin >> n;
-    cout << endl;
-    if (!cin) {
-        cout << "Some error occured" << endl;
-        return 1;
-    }
-    vector<int> arr(n);
-    for (int i = 0; i < n; i++) {
-        cout << "Enter element of array: ";
-        cin >> arr[i];
-        cout << endl;
-        if (!cin) {
-            cout << "Some error occured" << endl;
-            return 1;
-        }
-    }
-
-    cout << "Choose sort method: 1 - SS, 2 - IS, 3 - BS, 4 - HS, 5 - MS, 6 - QS, 7 - CS: ";
-    int act;
-    cin >> act;
-
-    switch(act) {
-        case 1:
-            SS(arr,n);
-            break;
-        case 2:
-            IS(arr,n);
-            break;
-        case 3:
-            BS(arr,n);
-            break;
-        case 4:
-            HS(arr,n);
-            break;
-        case 5:
-            arr = MS(arr,n);
-            break;
-        case 6:
-            QS(arr,0,n-1);
-            break;
-        case 7:
-            CS(arr,n);
-        default:
-            break;
-    }
-    for (int i = 0; i < n; i++) {
-        cout << " " << arr[i] << " ";
-    }
-    cout << endl;
-}
 
 void SS(vector<int> &arr, int n) {
     
@@ -281,4 +217,17 @@ void CS(vector<int> &arr, int n) {
         arr[i] = final[i];
     }
 
+}
+
+int main() {
+    for (int i = 1000; i < 10001; i+=1000) {
+        vector<int> arr;
+        for (int j = 0; j < i+1; j++) {
+            int val = rand() % 10000 + 1;
+            arr.push_back(val);
+        }
+    clock_t tStart = clock();
+    SS(arr, i);
+    printf("%.3f\n",(double)(clock() - tStart)/CLOCKS_PER_SEC*1000);
+    }
 }

@@ -1,6 +1,10 @@
 #include <iostream>
+#include <stdlib.h>
 #include <vector>
-#include <cmath>
+#include <stdlib.h>
+#include <time.h> 
+
+using namespace std;
 
 int n,k;
 vector <int> vec;
@@ -49,20 +53,21 @@ void sorting(int l, int r){
 }
 
 int main(){
-    int l,r;
-    cin >> n;
+
+    for (int i = 1000; i < 10001; i+=1000) {
+        vector<int> arr;
+        for (int j = 0; j < i+1; j++) {
+            int val = rand() % 10000 + 1;
+            arr.push_back(val);
+        }
+    clock_t tStart = clock();
     vec.resize(n);
-    for (int i=0; i<n; i++){
-        cin >> vec[i];
+    int l = 0;
+    int r = i - 1;
+    sorting(l, i-1);
+    printf("%.3f\n",(double)(clock() - tStart)/CLOCKS_PER_SEC*1000);
     }
-    l=0;
-    r=n-1;
 
-    sorting(l,r);
-
-    for (int i=0; i<n; i++){
-        cout << vec[i] << " ";
-    }
 
 return 0;
 }
