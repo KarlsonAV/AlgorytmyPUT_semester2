@@ -222,12 +222,12 @@ void CS(vector<int> &arr, int n) {
 int main() {
     for (int i = 1000; i < 10001; i+=1000) {
         vector<int> arr;
-        for (int j = 0; j < i+1; j++) {
+        for (int j = 0; j < (i * 100)+1; j++) {
             int val = rand() % 10000 + 1;
             arr.push_back(val);
         }
     clock_t tStart = clock();
-    SS(arr, i);
+    QS(arr, 0, i-1);
     printf("%.3f\n",(double)(clock() - tStart)/CLOCKS_PER_SEC*1000);
     }
 }
