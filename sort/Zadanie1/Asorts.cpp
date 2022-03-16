@@ -36,7 +36,7 @@ int main() {
         }
     }
 
-    cout << "Choose sort method: 1 - SS, 2 - IS, 3 - BS, 4 - HS, 5 - MS, 6 - QS, 7 - CS: ";
+    cout << "Choose sort method: 1 - SS, 2 - IS, 3 - BS, 4 - HS, 5 - MS, 6 - QS, 7 - CS, 8 - Metoda Shella: ";
     int act;
     cin >> act;
 
@@ -61,6 +61,10 @@ int main() {
             break;
         case 7:
             CS(arr,n);
+        case 8:
+            MSa(arr,n);
+            break;
+            
         default:
             break;
     }

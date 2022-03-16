@@ -6,6 +6,29 @@
 
 using namespace std;
 
+int partition(vector<int> &array, int low, int high) {
+    
+  int pivot = array[high];
+  int i = (low - 1);
+  
+  for (int j = low; j < high; j++) {
+    if (array[j] <= pivot) {
+      swap(array[i], array[j]);
+    }
+  }
+  swap(array[i + 1], array[high]);
+  return (i + 1);
+}
+
+void quickSort(vector<int> &array, int low, int high) {
+  if (low < high) {
+    int pi = partition(array, low, high);
+    quickSort(array, low, pi - 1);
+    quickSort(array, pi + 1, high);
+  }
+}
+
+
 void SS(vector<int> &arr, int n) {
     
     for (int i = 0; i < n - 1; i++) {
@@ -220,14 +243,102 @@ void CS(vector<int> &arr, int n) {
 }
 
 int main() {
+    cout << "------------------\n------------------" << endl;
+    cout << "IS" << endl;
+
     for (int i = 1000; i < 10001; i+=1000) {
         vector<int> arr;
-        for (int j = 0; j < (i * 100)+1; j++) {
-            int val = rand() % 10000 + 1;
-            arr.push_back(val);
+        for (int j = 0; j < i; j++) {
+            arr.push_back(rand() % 1000 + 1);
         }
+
     clock_t tStart = clock();
-    QS(arr, 0, i-1);
+    IS(arr,i);
     printf("%.3f\n",(double)(clock() - tStart)/CLOCKS_PER_SEC*1000);
     }
+
+    cout << "------------------\n------------------" << endl;
+    cout << "SS" << endl;
+
+    for (int i = 1000; i < 10001; i+=1000) {
+        vector<int> arr;
+        for (int j = 0; j < i; j++) {
+            arr.push_back(rand() % 1000 + 1);
+        }
+
+    clock_t tStart = clock();
+    SS(arr,i);
+    printf("%.3f\n",(double)(clock() - tStart)/CLOCKS_PER_SEC*1000);
+    }
+
+    cout << "------------------\n------------------" << endl;
+    cout << "BS" << endl;
+
+    for (int i = 1000; i < 10001; i+=1000) {
+        vector<int> arr;
+        for (int j = 0; j < i; j++) {
+            arr.push_back(rand() % 1000 + 1);
+        }
+
+    clock_t tStart = clock();
+    BS(arr,i);
+    printf("%.3f\n",(double)(clock() - tStart)/CLOCKS_PER_SEC*1000);
+    }
+
+    cout << "------------------\n------------------" << endl;
+    cout << "HS" << endl;
+
+    for (int i = 1000; i < 10001; i+=1000) {
+        vector<int> arr;
+        for (int j = 0; j < i; j++) {
+            arr.push_back(rand() % 1000 + 1);
+        }
+
+    clock_t tStart = clock();
+    HS(arr,i);
+    printf("%.3f\n",(double)(clock() - tStart)/CLOCKS_PER_SEC*1000);
+    }
+
+    cout << "------------------\n------------------" << endl;
+    cout << "MS" << endl;
+
+    for (int i = 1000; i < 10001; i+=1000) {
+        vector<int> arr;
+        for (int j = 0; j < i; j++) {
+            arr.push_back(rand() % 1000 + 1);
+        }
+
+    clock_t tStart = clock();
+    MS(arr,i);
+    printf("%.3f\n",(double)(clock() - tStart)/CLOCKS_PER_SEC*1000);
+    }
+
+    cout << "------------------\n------------------" << endl;
+    cout << "QS" << endl;
+
+    for (int i = 1000; i < 10001; i+=1000) {
+        vector<int> arr;
+        for (int j = 0; j < i; j++) {
+            arr.push_back(rand() % 1000 + 1);
+        }
+
+    clock_t tStart = clock();
+    QS(arr,0,i);
+    printf("%.3f\n",(double)(clock() - tStart)/CLOCKS_PER_SEC*1000);
+    }
+
+    cout << "------------------\n------------------" << endl;
+    cout << "CS" << endl;
+
+    for (int i = 1000; i < 10001; i+=1000) {
+        vector<int> arr;
+        for (int j = 0; j < i; j++) {
+            arr.push_back(rand() % 1000 + 1);
+        }
+
+    clock_t tStart = clock();
+    CS(arr,i);
+    printf("%.3f\n",(double)(clock() - tStart)/CLOCKS_PER_SEC*1000);
+    }
+
 }
