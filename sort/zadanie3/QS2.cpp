@@ -6,27 +6,22 @@
 
 using namespace std;
 
-void swap(int *a, int *b) {
-  int t = *a;
-  *a = *b;
-  *b = t;
-}
 
-int partition(int array[], int low, int high) {
+int partition(vector<int> &array, int low, int high) {
 
   int pivot = array[high];
   int i = (low - 1);
   for (int j = low; j < high; j++) {
     if (array[j] <= pivot) {
       i++;
-      swap(&array[i], &array[j]);
+      swap(array[i], array[j]);
     }
   }
-  swap(&array[i + 1], &array[high]);
+  swap(array[i + 1], array[high]);
   return (i + 1);
 }
 
-void quickSort(int array[], int low, int high) {
+void quickSort(vector<int> &array, int low, int high) {
   if (low < high) {
     int pi = partition(array, low, high);
     quickSort(array, low, pi - 1);
@@ -40,10 +35,10 @@ int main() {
   cout << "------------------\n------------------" << endl;
   cout << "QS(Skrajny) czas dla układu rosnącego " << endl;
   for (int i = 1000; i < 10001; i += 1000) {
-      int data[i];
+      vector<int> data;
       int sum = 0;
       for (int j = 0; j < i; j++) {
-          data[j] = sum;
+          data.push_back(sum);
           sum +=2;
       }
   clock_t tStart = clock();
@@ -57,10 +52,10 @@ int main() {
 
   for (int i = 1000; i < 10001; i += 1000) {
 
-      int data[i];
+      vector<int> data;
 
       for (int j = 0; j < i; j++) {
-          data[j] = rand() % 1000 + 1;
+          data.push_back(rand() % 1000 + 1);
       }
   clock_t tStart = clock();
   quickSort(data, 0, i - 1);

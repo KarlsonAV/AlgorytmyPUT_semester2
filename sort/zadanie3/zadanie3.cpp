@@ -102,7 +102,7 @@ int main() {
         }
 
     clock_t tStart = clock();
-    QS(arr, 0, i);
+    QS(arr, 0, i-1);
     printf("%.3f\n",(double)(clock() - tStart)/CLOCKS_PER_SEC*1000);
     }
 
@@ -118,7 +118,7 @@ int main() {
         }
 
     clock_t tStart = clock();
-    QS(arr, 0, i);
+    QS(arr, 0, i-1);
     printf("%.3f\n",(double)(clock() - tStart)/CLOCKS_PER_SEC*1000);
     }
 
