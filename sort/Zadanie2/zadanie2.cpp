@@ -52,6 +52,9 @@ void IS(vector<int> &arr, int n) {
             if (arr[j] < arr[j-1]) {
                 swap(arr[j],arr[j-1]);
             }
+            else {
+                break;
+            }
         }
     }
     return;
