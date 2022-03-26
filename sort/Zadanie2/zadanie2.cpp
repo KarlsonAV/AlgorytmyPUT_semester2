@@ -1,7 +1,6 @@
 #include <iostream>
 #include <stdlib.h>
 #include <vector>
-#include <stdlib.h>
 #include <time.h> 
 
 using namespace std;
@@ -18,7 +17,7 @@ int partition(vector<int> &array, int low, int high) {
   }
   swap(array[i + 1], array[high]);
   return (i + 1);
-}
+
 
 void quickSort(vector<int> &array, int low, int high) {
   if (low < high) {
