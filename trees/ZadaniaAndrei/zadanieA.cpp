@@ -41,6 +41,23 @@ void quickSort(int array[], int low, int high) {
   }
 }
 
+int binarySearch(int arr[], int l, int r, int x)
+{
+    if (r >= l) {
+        int mid = (l+r)>>1;
+        
+        if (arr[mid] == x)
+            return mid;
+
+        if (arr[mid] > x)
+            return binarySearch(arr, l, mid - 1, x);
+
+        return binarySearch(arr, mid + 1, r, x);
+    }
+
+    return -1;
+}
+
 void Cb() {
 
     for (int n = 1000; n <= 20000; n += 1000) {
@@ -146,26 +163,15 @@ void Sb() {
         }
 
         quickSort(B, 0, n-1);
+
         clock_t tStart = clock();
 
         for (int i = 0; i < n; i++) {
-            int left = 0;
-            int right = n-1;
-            while (left <= right) {
-                int mid = left + (right - left) / 2;
-                if (B[mid] == A[i]) {
-                    break;
-                }
-
-                else if (B[mid] < A[i]) {
-                    left = mid + 1;
-                }
-                else {
-                    right = mid - 1;
-                }
-            }
+            binarySearch(B, 0, n-1, A[i]);
         }
+
         printf("%.3f\n",(double)(clock() - tStart)/CLOCKS_PER_SEC*1000);
+    
     }
 }
 
@@ -220,6 +226,15 @@ void PreorderPrint(BstNode* root) {
     PreorderPrint(root->right);
 }
 
+int itct = 0;
+void Copy_Table(BstNode* root, int arr[]) {
+    if (root == NULL) return;
+
+    arr[itct++] = root->data;
+    Copy_Table(root->left, arr);
+    Copy_Table(root->right, arr);
+}
+
 bool Search(BstNode* root, int data) {
     if (root == NULL) return false;
     else if (root->data == data) return true;
@@ -272,7 +287,7 @@ void Cta() {
     }
 }
 
-void Ctb() {
+void Ctb_0() {
 
        for (int n = 1000; n <= 20000; n += 1000) {
         int A[n];
@@ -307,6 +322,55 @@ void Ctb() {
         tStart = clock();
 
         for (int i = 0; i < n; i++) {
+            bool a = Search(root, A[i]);
+        }
+
+        printf(", czas wyszukiwania kolejnych elementow - %.3f\n",(double)(clock() - tStart)/CLOCKS_PER_SEC*1000);
+
+    }
+} 
+
+void Ctb() {
+
+       for (int n = 1000; n <= 20000; n += 1000) {
+        int A[n];
+        int prev = 0;
+        for (int i = 0; i < n; i++) {
+            
+            int number;
+            
+            do {
+
+                number = rand() % 100000;
+
+            } while (number == prev);
+            
+            prev = number;
+            A[i] = number;
+           
+        }
+
+        int B[n];
+        for (int i = 0; i < n; i++) {
+            B[i] = A[i];
+        }
+
+        quickSort(B, 0, n-1);
+        
+        BstNode* root1 = sortedArraytoBST(B, 0, n);
+        int B_c[n];
+        itct = 0;
+        Copy_Table(root1, B_c);
+
+        clock_t tStart = clock();
+        BstNode* root = arrayToBST(B_c, n);
+        printf("%.3f",(double)(clock() - tStart)/CLOCKS_PER_SEC*1000);
+
+        cout << ", wysokość - " << FindHeight(root);
+
+        tStart = clock();
+
+        for (int i = 0; i < n; i++) {
             Search(root, A[i]);
         }
 
@@ -329,6 +393,9 @@ int main()
     cout << "-----\n-----" << endl;
     cout << "Cta - Czas tworzenia drzewa TA, oraz Sta" << endl;
     Cta();
+    cout << "-----\n-----" << endl;
+    cout << "Ctb_0 - Czas tworzenia drzewa TB, oraz Stb" << endl;
+    Ctb_0();
     cout << "-----\n-----" << endl;
     cout << "Ctb - Czas tworzenia drzewa TB, oraz Stb" << endl;
     Ctb();
