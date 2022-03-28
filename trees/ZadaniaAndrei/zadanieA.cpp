@@ -2,9 +2,12 @@
 #include <stdlib.h>
 #include <time.h>
 #include <algorithm>  
+#include <random>
 
 using namespace std;
 
+
+int itct = 0;
 void swap(int *a, int *b) {
   int t = *a;
   *a = *b;
@@ -43,40 +46,34 @@ void quickSort(int array[], int low, int high) {
 
 int binarySearch(int arr[], int l, int r, int x)
 {
-    if (r >= l) {
-        int mid = (l+r)>>1;
-        
-        if (arr[mid] == x)
-            return mid;
-
-        if (arr[mid] > x)
-            return binarySearch(arr, l, mid - 1, x);
-
-        return binarySearch(arr, mid + 1, r, x);
+    while (l <= r) {
+        int m = (l+r)>>1;
+ 
+        if (arr[m] == x)
+            return m;
+ 
+        if (arr[m] < x)
+            l = m + 1;
+ 
+        else
+            r = m - 1;
     }
-
+ 
     return -1;
 }
+
 
 void Cb() {
 
     for (int n = 1000; n <= 20000; n += 1000) {
+        
         int A[n];
-        int prev = 0;
+
         for (int i = 0; i < n; i++) {
-            
-            int number;
-            
-            do {
-
-                number = rand() % 100000;
-
-            } while (number == prev);
-            
-            prev = number;
-            A[i] = number;
-           
+            A[i] = i+1;
         }
+
+        shuffle(A, A+n, random_device());
         
         clock_t tStart = clock();
 
@@ -95,22 +92,13 @@ void Cb() {
 void Sa() {
 
     for (int n = 1000; n <= 20000; n += 1000) {
+        
         int A[n];
-        int prev = 0;
+
         for (int i = 0; i < n; i++) {
-            
-            int number;
-            
-            do {
-
-                number = rand() % 100000;
-
-            } while (number == prev);
-            
-            prev = number;
-            A[i] = number;
-           
+            A[i] = i+1;
         }
+        shuffle(A, A+n, random_device());
 
         int B[n];
         for (int i = 0; i < n; i++) {
@@ -140,22 +128,13 @@ void Sa() {
 void Sb() {
 
        for (int n = 1000; n <= 20000; n += 1000) {
+        
         int A[n];
-        int prev = 0;
+
         for (int i = 0; i < n; i++) {
-            
-            int number;
-            
-            do {
-
-                number = rand() % 100000;
-
-            } while (number == prev);
-            
-            prev = number;
-            A[i] = number;
-           
+            A[i] = i+1;
         }
+        shuffle(A, A+n, random_device());
 
         int B[n];
         for (int i = 0; i < n; i++) {
@@ -192,19 +171,21 @@ BstNode* Insert(BstNode* root, int data) {
         return new BstNode(data);
     }
 
-    else if (data <= root->data) {
-        root->left = Insert(root->left, data);
-    }
-    else {
+    else if (data > root->data) {
         root->right = Insert(root->right, data);
     }
+    else {
+        root->left = Insert(root->left, data);
+    }
+
     return root;
 }
-
+int check = 0;
 BstNode* arrayToBST(int arr[], int n) {
     BstNode* root = NULL;
     for (int i = 0; i < n; i++) {
         root = Insert(root, arr[i]);
+        check++;
     }
     return root;
 }
@@ -226,7 +207,7 @@ void PreorderPrint(BstNode* root) {
     PreorderPrint(root->right);
 }
 
-int itct = 0;
+
 void Copy_Table(BstNode* root, int arr[]) {
     if (root == NULL) return;
 
@@ -254,22 +235,12 @@ int FindHeight(BstNode* root) {
 void Cta() {
 
        for (int n = 1000; n <= 20000; n += 1000) {
+
         int A[n];
-        int prev = 0;
         for (int i = 0; i < n; i++) {
-            
-            int number;
-            
-            do {
-
-                number = rand() % 100000;
-
-            } while (number == prev);
-            
-            prev = number;
-            A[i] = number;
-           
+            A[i] = i+1;
         }
+        shuffle(A, A+n, random_device());
 
         clock_t tStart = clock();
         BstNode* root = arrayToBST(A, n);
@@ -290,22 +261,12 @@ void Cta() {
 void Ctb_0() {
 
        for (int n = 1000; n <= 20000; n += 1000) {
+        
         int A[n];
-        int prev = 0;
         for (int i = 0; i < n; i++) {
-            
-            int number;
-            
-            do {
-
-                number = rand() % 100000;
-
-            } while (number == prev);
-            
-            prev = number;
-            A[i] = number;
-           
+            A[i] = i+1;
         }
+        shuffle(A, A+n, random_device());
 
         int B[n];
         for (int i = 0; i < n; i++) {
@@ -314,7 +275,7 @@ void Ctb_0() {
 
         quickSort(B, 0, n-1);
         clock_t tStart = clock();
-        BstNode* root = sortedArraytoBST(B, 0, n);
+        BstNode* root = sortedArraytoBST(B, 0, n-1);
         printf("%.3f",(double)(clock() - tStart)/CLOCKS_PER_SEC*1000);
 
         cout << ", wysokość - " << FindHeight(root);
@@ -334,21 +295,10 @@ void Ctb() {
 
        for (int n = 1000; n <= 20000; n += 1000) {
         int A[n];
-        int prev = 0;
         for (int i = 0; i < n; i++) {
-            
-            int number;
-            
-            do {
-
-                number = rand() % 100000;
-
-            } while (number == prev);
-            
-            prev = number;
-            A[i] = number;
-           
+            A[i] = i+1;
         }
+        shuffle(A, A+n, random_device());
 
         int B[n];
         for (int i = 0; i < n; i++) {
@@ -357,7 +307,7 @@ void Ctb() {
 
         quickSort(B, 0, n-1);
         
-        BstNode* root1 = sortedArraytoBST(B, 0, n);
+        BstNode* root1 = sortedArraytoBST(B, 0, n-1);
         int B_c[n];
         itct = 0;
         Copy_Table(root1, B_c);
@@ -379,6 +329,7 @@ void Ctb() {
     }
 }
 
+
 int main() 
 {
     cout << "-----\n-----" << endl;
@@ -399,7 +350,9 @@ int main()
     cout << "-----\n-----" << endl;
     cout << "Ctb - Czas tworzenia drzewa TB, oraz Stb" << endl;
     Ctb();
-    cout << "-----\n-----" << endl;
+    cout << "-----\n-----" << endl;   
+
+
 
 }
 
