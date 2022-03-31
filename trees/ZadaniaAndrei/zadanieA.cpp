@@ -3,6 +3,7 @@
 #include <time.h>
 #include <algorithm>  
 #include <random>
+#include <queue>
 
 using namespace std;
 
@@ -61,6 +62,7 @@ int binarySearch(int arr[], int l, int r, int x)
  
     return -1;
 }
+
 
 
 void Cb() {
@@ -180,12 +182,11 @@ BstNode* Insert(BstNode* root, int data) {
 
     return root;
 }
-int check = 0;
+
 BstNode* arrayToBST(int arr[], int n) {
     BstNode* root = NULL;
     for (int i = 0; i < n; i++) {
         root = Insert(root, arr[i]);
-        check++;
     }
     return root;
 }
@@ -228,8 +229,24 @@ int FindHeight(BstNode* root) {
     if (root == NULL) return -1;
     int left_hight = FindHeight(root->left);
     int right_hight = FindHeight(root->right);
-
     return max(left_hight, right_hight) + 1;
+}
+
+void LevelOrder(BstNode* root, int arr[]) {
+    if (root == NULL) { 
+        return;
+    }
+    
+    queue<BstNode*> Q;
+    Q.push(root);
+    while (!Q.empty()) {
+        BstNode* current = Q.front();
+        arr[itct++] = current->data;
+        if (current->left != NULL) Q.push(current->left);
+        if (current->right != NULL) Q.push(current->right);
+        Q.pop();
+    }
+
 }
 
 void Cta() {
@@ -291,45 +308,6 @@ void Ctb_0() {
     }
 } 
 
-void Ctb() {
-
-       for (int n = 1000; n <= 20000; n += 1000) {
-        int A[n];
-        for (int i = 0; i < n; i++) {
-            A[i] = i+1;
-        }
-        shuffle(A, A+n, random_device());
-
-        int B[n];
-        for (int i = 0; i < n; i++) {
-            B[i] = A[i];
-        }
-
-        quickSort(B, 0, n-1);
-        
-        BstNode* root1 = sortedArraytoBST(B, 0, n-1);
-        int B_c[n];
-        itct = 0;
-        Copy_Table(root1, B_c);
-
-        clock_t tStart = clock();
-        BstNode* root = arrayToBST(B_c, n);
-        printf("%.3f",(double)(clock() - tStart)/CLOCKS_PER_SEC*1000);
-
-        cout << ", wysokość - " << FindHeight(root);
-
-        tStart = clock();
-
-        for (int i = 0; i < n; i++) {
-            Search(root, A[i]);
-        }
-
-        printf(", czas wyszukiwania kolejnych elementow - %.3f\n",(double)(clock() - tStart)/CLOCKS_PER_SEC*1000);
-
-    }
-}
-
-
 int main() 
 {
     cout << "-----\n-----" << endl;
@@ -344,15 +322,9 @@ int main()
     cout << "-----\n-----" << endl;
     cout << "Cta - Czas tworzenia drzewa TA, oraz Sta" << endl;
     Cta();
-    cout << "-----\n-----" << endl;
-    cout << "Ctb_0 - Czas tworzenia drzewa TB, oraz Stb" << endl;
-    Ctb_0();
-    cout << "-----\n-----" << endl;
     cout << "Ctb - Czas tworzenia drzewa TB, oraz Stb" << endl;
     Ctb();
     cout << "-----\n-----" << endl;   
-
-
 
 }
 
