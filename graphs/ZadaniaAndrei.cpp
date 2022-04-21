@@ -114,18 +114,25 @@ void Task(int n, float d) {
     
     vertex_count = 0;
     tStart = clock();
+    
     for (i = 0; i < m; i++) 
 	if ((in[VL[1][i]] < in[VL[0][i]]) && (in[VL[0][i]] < out[VL[0][i]]) && (out[VL[0][i]] < out[VL[1][i]])) 
 	    vertex_count++;
 
     printf("Czas zliczania łukow powrotnych dla listy lukow - %.3f\n",(double)(clock() - tStart) / CLOCKS_PER_SEC*1000);
 
-    vertex_count = 0;
+    
     tStart = clock();
+    vertex_count = 0;
     for(i = 0; i < n; i++) {
 	last = CL[i];
-	while(last != NULL) { 
-	    if((in[last->val] < in[i]) && (in[i] < out[i]) && (out[i] < out[last->val]))
+    int father_0, father_1, child_0, child_1;
+	while(last != NULL) {
+        father_0 = in[last->val];
+        father_1 = in[i];
+        child_0 = out[i];
+        child_1 = out[last->val];
+	    if((father_0 < father_1) && (father_1 < child_0) && (child_0 < child_1))
 		vertex_count++; 
 	    last = last->next;
 	}
@@ -159,6 +166,4 @@ int main() {
             cout << "----------\n----------" << endl;
         }
     }
-
-    
 }
