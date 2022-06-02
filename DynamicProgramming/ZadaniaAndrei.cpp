@@ -233,7 +233,7 @@ int main() {
     
     int **p = (int**) malloc (n * sizeof(int*));
     for (i = 0; i < n; i++) { 
-	p[i] = (int*) malloc (ws * sizeof(int*));
+	p[i] = (int*) malloc (n * ws * sizeof(int*));
 	p[i][s] = rand()%(smax - smin) + smin;
 	b += p[i][s];
 	p[i][w] = rand()%(wmax - wmin) + wmin;

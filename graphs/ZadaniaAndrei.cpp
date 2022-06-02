@@ -53,7 +53,7 @@ void Arc_List(int **VL, int **AM, int n) {
     int i = 0;
     
     for(int x = 0; x < n; x++) {
-	for(int y = 0; y < n; y++) {
+	for(int y = 0; y < n; y++) {v
 	    if(AM[x][y]) {
 		VL[0][i] = x;
 		VL[1][i] = y;
